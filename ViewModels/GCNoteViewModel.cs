@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace TallerMVVMGabrielCalderon.ViewModels
 {
-    internal class NoteViewModel : ObservableObject, IQueryAttributable
+    internal class GCNoteViewModel : ObservableObject, IQueryAttributable
     {
         private Models.Note _note;
 
@@ -30,14 +30,14 @@ namespace TallerMVVMGabrielCalderon.ViewModels
         public ICommand SaveCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
 
-        public NoteViewModel()
+        public GCNoteViewModel()
         {
             _note = new Models.Note();
             SaveCommand = new AsyncRelayCommand(Save);
             DeleteCommand = new AsyncRelayCommand(Delete);
         }
 
-        public NoteViewModel(Models.Note note)
+        public GCNoteViewModel(Models.Note note)
         {
             _note = note;
             SaveCommand = new AsyncRelayCommand(Save);

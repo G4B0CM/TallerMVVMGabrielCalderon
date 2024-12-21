@@ -4,7 +4,7 @@
              xmlns:viewModels="clr-namespace:TallerMVVMGabrielCalderon.ViewModels"
              x:Class="TallerMVVMGabrielCalderon.Views.AboutPage">
     <ContentPage.BindingContext>
-        <viewModels:AboutViewModel />
+        <viewModels:GCAboutViewModel />
     </ContentPage.BindingContext>
     <VerticalStackLayout Spacing="10" Margin="10">
         <HorizontalStackLayout Spacing="10">

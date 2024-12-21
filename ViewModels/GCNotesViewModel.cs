@@ -7,17 +7,17 @@ using TallerMVVMGabrielCalderon.Models;
 
 namespace TallerMVVMGabrielCalderon.ViewModels
 {
-    internal class NotesViewModel : IQueryAttributable
+    internal class GCNotesViewModel : IQueryAttributable
     {
-        public ObservableCollection<ViewModels.NoteViewModel> AllNotes { get; }
+        public ObservableCollection<ViewModels.GCNoteViewModel> AllNotes { get; }
         public ICommand NewCommand { get; }
         public ICommand SelectNoteCommand { get; }
 
-        public NotesViewModel()
+        public GCNotesViewModel()
         {
-            AllNotes = new ObservableCollection<ViewModels.NoteViewModel>(Models.Note.LoadAll().Select(n => new NoteViewModel(n)));
+            AllNotes = new ObservableCollection<ViewModels.GCNoteViewModel>(Models.Note.LoadAll().Select(n => new GCNoteViewModel(n)));
             NewCommand = new AsyncRelayCommand(NewNoteAsync);
-            SelectNoteCommand = new AsyncRelayCommand<ViewModels.NoteViewModel>(SelectNoteAsync);
+            SelectNoteCommand = new AsyncRelayCommand<ViewModels.GCNoteViewModel>(SelectNoteAsync);
         }
 
         private async Task NewNoteAsync()
@@ -25,7 +25,7 @@ namespace TallerMVVMGabrielCalderon.ViewModels
             await Shell.Current.GoToAsync(nameof(Views.NotePage));
         }
 
-        private async Task SelectNoteAsync(ViewModels.NoteViewModel note)
+        private async Task SelectNoteAsync(ViewModels.GCNoteViewModel note)
         {
             if (note != null)
                 await Shell.Current.GoToAsync($"{nameof(Views.NotePage)}?load={note.Identifier}");
@@ -36,7 +36,7 @@ namespace TallerMVVMGabrielCalderon.ViewModels
             if (query.ContainsKey("deleted"))
             {
                 string noteId = query["deleted"].ToString();
-                NoteViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
+                GCNoteViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
 
                 // If note exists, delete it
                 if (matchedNote != null)
@@ -45,7 +45,7 @@ namespace TallerMVVMGabrielCalderon.ViewModels
             else if (query.ContainsKey("saved"))
             {
                 string noteId = query["saved"].ToString();
-                NoteViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
+                GCNoteViewModel matchedNote = AllNotes.Where((n) => n.Identifier == noteId).FirstOrDefault();
 
                 // If note is found, update it
                 if (matchedNote != null)
@@ -53,7 +53,7 @@ namespace TallerMVVMGabrielCalderon.ViewModels
 
                 // If note isn't found, it's new; add it.
                 else
-                    AllNotes.Add(new NoteViewModel(Note.Load(noteId)));
+                    AllNotes.Add(new GCNoteViewModel(Note.Load(noteId)));
             }
         }
     }
