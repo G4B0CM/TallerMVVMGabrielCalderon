@@ -12,37 +12,37 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding NewCommand}" IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}" />
     </ContentPage.ToolbarItems>
+    <VerticalStackLayout>
+        <Label Text="Notas recientes:" FontSize="Header" HorizontalOptions="Center" TextColor="Aquamarine"/>
+        <HorizontalStackLayout>
+            <Image
+         HeightRequest="400" 
+         WidthRequest="300"
+         HorizontalOptions="Center"
+         Source="gato.jpg"/>
 
-    <FlexLayout Direction="Row"   >
-        <Label
-            HeightRequest="400" 
-            WidthRequest="200"
-            VerticalTextAlignment="Center"
-            HorizontalTextAlignment="Center"
-            Text="  Hola, a continuación puedes escribir tus notas!"
-            LineBreakMode="WordWrap"
-            FontSize="Title"/>
+            <CollectionView x:Name="notesCollection"
+             ItemsSource="{Binding AllNotes}"
+             Margin="20"
+             SelectionMode="Single"
+             SelectionChangedCommand="{Binding SelectNoteCommand}"
+             SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
 
-        <CollectionView x:Name="notesCollection"
-                ItemsSource="{Binding AllNotes}"
-                Margin="20"
-                SelectionMode="Single"
-                SelectionChangedCommand="{Binding SelectNoteCommand}"
-                SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
-
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
 
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Text}" FontSize="22"/>
-                        <Label Text="{Binding Date}" FontSize="14" TextColor="LightBlue"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </FlexLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Text}" FontSize="22"/>
+                            <Label Text="{Binding Date}" FontSize="14" TextColor="LightBlue"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+ 
 </ContentPage>
